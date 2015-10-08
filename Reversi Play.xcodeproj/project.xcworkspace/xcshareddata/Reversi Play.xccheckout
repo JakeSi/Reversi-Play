@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>94CF65B8-3307-423A-99CD-CA2E76AA8E98</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Reversi Play</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>416A8442A8EB26AEE479BDD53AB25ABA00E8A78A</key>
+		<string>https://github.com/JakeSi/Reversi-Play.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Reversi Play.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>416A8442A8EB26AEE479BDD53AB25ABA00E8A78A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JakeSi/Reversi-Play.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>416A8442A8EB26AEE479BDD53AB25ABA00E8A78A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>416A8442A8EB26AEE479BDD53AB25ABA00E8A78A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Reversi%20Play</string>
+		</dict>
+	</array>
+</dict>
+</plist>

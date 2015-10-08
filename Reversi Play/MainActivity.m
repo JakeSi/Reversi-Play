@@ -61,8 +61,8 @@
         //setting up the board
         whitePieces = [[NSMutableArray alloc] init];
         blackPieces = [[NSMutableArray alloc] init];
-        for (int a=0; a<10; a++) {
-            for (int b=0; b<10; b++) {
+        for (NSInteger a=0; a<10; a++) {
+            for (NSInteger b=0; b<10; b++) {
                 pieceArray[a][b] = 0;
                 
             }
@@ -79,20 +79,20 @@
 }
 
 -(void) drawPieces{
-    for (int i = 1; i<=blackcount; i++){
+    for (NSInteger i = 1; i<=blackcount; i++){
         [self removeChildByTag:i cleanup:YES];
     }
-    for (int i = 1; i<=whitecount; i++){
+    for (NSInteger i = 1; i<=whitecount; i++){
         [self removeChildByTag:i cleanup:YES];
     }
-    for (int i = 1; i<=checkMoves; i++) {
+    for (NSInteger i = 1; i<=checkMoves; i++) {
         [self removeChildByTag:i cleanup:YES];
     }
     checkMoves = 0;
     blackcount = 0;
     whitecount = 0;
-    for (int a = 1; a<=8; a++) {
-        for (int b=1; b<=8; b++) {
+    for (NSInteger a = 1; a<=8; a++) {
+        for (NSInteger b=1; b<=8; b++) {
             Boolean check =[self checkFlip:a ToColumn:b ToCurrentPlayer:CurrentPlayer];
             if (pieceArray[a][b] == 1 ) {
                 blackcount++;
@@ -108,7 +108,7 @@
                 [self addChild: white z:0 tag:whitecount];
                 [whitePieces addObject:white];
             }
-            else if(pieceArray[a][b] == 0 && check == true){
+            else if(pieceArray[a][b] == 0 && check == YES){
                 checkMoves++;
                 if (CurrentPlayer == 1) {
                     checkPiece = [CCSprite spriteWithFile:@"blackdot.png"];
@@ -125,10 +125,10 @@
     }
     if (checkMoves == 0) {
         CurrentPlayer *= -1;
-        for (int a = 1; a<=8; a++) {
-            for (int b=1; b<=8; b++) {
+        for (NSInteger a = 1; a<=8; a++) {
+            for (NSInteger b=1; b<=8; b++) {
                 Boolean check =[self checkFlip:a ToColumn:b ToCurrentPlayer:CurrentPlayer];
-                if(pieceArray[a][b] == 0 && check == true){
+                if(pieceArray[a][b] == 0 && check == YES){
                     checkMoves++;
                     if (CurrentPlayer == 1) {
                         checkPiece = [CCSprite spriteWithFile:@"blackdot.png"];
@@ -171,11 +171,11 @@
     [[CCDirector sharedDirector]replaceScene:[HelloWorldLayer node]];
 }
 
--(void) flipPiece:(int)iRow ToColumn:(int)iColumn ToCurrentPlayer:(int)CurrentPlayer{
-    int RowChange = 0;
-    int ColumnChange = 0;
-    int FlipColor = 0;
-    int DrawColor = 0;
+-(void) flipPiece:(NSInteger)iRow ToColumn:(NSInteger)iColumn ToCurrentPlayer:(NSInteger)CurrentPlayer{
+    NSInteger RowChange = 0;
+    NSInteger ColumnChange = 0;
+    NSInteger FlipColor = 0;
+    NSInteger DrawColor = 0;
     
     //Player1(black) = 1 Player2(white) = -1
     if (CurrentPlayer == 1){
@@ -186,7 +186,7 @@
         DrawColor = -1;
     }
     
-    for (int direction = 1;direction<=8;direction++){
+    for (NSInteger direction = 1;direction<=8;direction++){
         switch (direction){
             case (1) :
                 RowChange = 1;
@@ -224,8 +224,8 @@
         //check the next piece
         //check the next piece
         if(pieceArray[iRow+RowChange][iColumn+ColumnChange] == FlipColor){
-            int count = 1;
-            while(true){
+            NSInteger count = 1;
+            while(YES){
                 if (pieceArray[iRow + count * RowChange][ iColumn + count * ColumnChange] != DrawColor){
                     count = count + 1;
                 }
@@ -240,7 +240,7 @@
             }
             
             //drawing the pieces and setting the color
-            for (int i = 1;i<=count;i++){
+            for (NSInteger i = 1;i<=count;i++){
                 pieceArray [iRow + RowChange * i][iColumn + ColumnChange * i] = DrawColor;
             }
         }
@@ -250,13 +250,13 @@
     
 }
 
--(Boolean) checkFlip:(int)iRow ToColumn:(int)iColumn ToCurrentPlayer:(int)CurrentPlayer{
-    int RowChange = 0;
-    int ColumnChange = 0;
-    int FlipColor = 0;
-    int DrawColor = 0;
+-(Boolean) checkFlip:(NSInteger)iRow ToColumn:(NSInteger)iColumn ToCurrentPlayer:(NSInteger)CurrentPlayer{
+    NSInteger RowChange = 0;
+    NSInteger ColumnChange = 0;
+    NSInteger FlipColor = 0;
+    NSInteger DrawColor = 0;
     
-    Boolean legalMove = false;
+    Boolean legalMove = NO;
     //Player1(black) = 1 Player2(white) = -1
     if (CurrentPlayer == 1){
         FlipColor = -1;
@@ -266,7 +266,7 @@
         DrawColor = -1;
     }
     //the for loop checks each direction
-    for (int direction = 1;direction<=8;direction++){
+    for (NSInteger direction = 1;direction<=8;direction++){
         switch (direction){
             case (1) :
                 RowChange = 1;
@@ -303,8 +303,8 @@
         }
         //check the next piece
         if(pieceArray[iRow+RowChange][iColumn+ColumnChange] == FlipColor){
-            int count = 1;
-            while(true){
+            NSInteger count = 1;
+            while(YES){
                 if (pieceArray[iRow + count * RowChange][iColumn + count * ColumnChange] != DrawColor){
                     count = count + 1;
                 }
@@ -319,7 +319,7 @@
             }
             //drawing the pieces and setting the color
             if (count > 0){
-                legalMove = true;
+                legalMove = YES;
                 break;
             }
             
@@ -328,8 +328,8 @@
     return legalMove;
 }
 
--(Boolean)isLegalMove:(int)boardX ToBoardY:(int)boardY ToCurrentPlayer:(int)CurrentPlayer{
-    Boolean legalMove = false;
+-(Boolean)isLegalMove:(NSInteger)boardX ToBoardY:(NSInteger)boardY ToCurrentPlayer:(NSInteger)CurrentPlayer{
+    Boolean legalMove = NO;
     
     if (pieceArray[boardX][boardY] == 0){
         legalMove = [self checkFlip:boardX ToColumn:boardY ToCurrentPlayer:CurrentPlayer];
@@ -337,14 +337,14 @@
     return legalMove;
 }
 
--(int)NumberOfMoves:(int)CurrentPlayer{
-    int total = 0;
+-(NSInteger)NumberOfMoves:(NSInteger)CurrentPlayer{
+    NSInteger total = 0;
     //look for possible moves
-    for (int i = 1; i<=8; i++) {
-        for (int j= 1; j<=8; j++) {
+    for (NSInteger i = 1; i<=8; i++) {
+        for (NSInteger j= 1; j<=8; j++) {
             if (pieceArray[i][j] == 0){
                 Boolean check = [self checkFlip:i ToColumn:j ToCurrentPlayer:CurrentPlayer];
-                if (check == true) {
+                if (check == YES) {
                     total+=1;
                 }
             }
@@ -360,7 +360,7 @@
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     CGPoint location = [touch locationInView: [touch view]];
     
-    for (int i=1; i<=8; i++) {
+    for (NSInteger i=1; i<=8; i++) {
         if (location.x >= (i-1)*40 && location.x <= (i)*40) {
             boardX = i;
         }
@@ -368,7 +368,7 @@
             boardY = i;
         }
     }
-    int moves = [self NumberOfMoves:CurrentPlayer];
+    NSInteger moves = [self NumberOfMoves:CurrentPlayer];
     
     //checks if move is legal
     if ([self isLegalMove:boardX ToBoardY:boardY ToCurrentPlayer:CurrentPlayer] && moves > 0){

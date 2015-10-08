@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import "CCTouchDispatcher.h"
 
-static const int valueArray[8][8] = {99,3,16,14,14,16,3,99,
+static const NSInteger valueArray[8][8] = {99,3,16,14,14,16,3,99,
     3,0,6,7,7,6,0,3,
     16,6,15,12,12,15,6,16,
     14,7,12,5,5,12,7,14,
@@ -75,8 +75,8 @@ static float THINK_TIME=5000.0f;
         //setting up the board
         whitePieces = [[NSMutableArray alloc] init];
         blackPieces = [[NSMutableArray alloc] init];
-        for (int a=0; a<10; a++) {
-            for (int b=0; b<10; b++) {
+        for (NSInteger a=0; a<10; a++) {
+            for (NSInteger b=0; b<10; b++) {
                 pieceArray[a][b] = 0;
                 
             }
@@ -93,20 +93,20 @@ static float THINK_TIME=5000.0f;
 }
 
 -(void) drawPieces{
-    for (int i = 1; i<=blackcount; i++){
+    for (NSInteger i = 1; i<=blackcount; i++){
         [self removeChildByTag:i cleanup:YES];
     }
-    for (int i = 1; i<=whitecount; i++){
+    for (NSInteger i = 1; i<=whitecount; i++){
         [self removeChildByTag:i cleanup:YES];
     }
-    for (int i = 1; i<=checkMoves; i++) {
+    for (NSInteger i = 1; i<=checkMoves; i++) {
         [self removeChildByTag:i cleanup:YES];
     }
     checkMoves = 0;
     blackcount = 0;
     whitecount = 0;
-    for (int a = 1; a<=8; a++) {
-        for (int b=1; b<=8; b++) {
+    for (NSInteger a = 1; a<=8; a++) {
+        for (NSInteger b=1; b<=8; b++) {
             Boolean check =[self checkFlip:a ToColumn:b ToCurrentPlayer:CurrentPlayer];
             if (pieceArray[a][b] == 1 ) {
                 blackcount++;
@@ -140,8 +140,8 @@ static float THINK_TIME=5000.0f;
     }
     if (checkMoves == 0) {
         CurrentPlayer = CurrentPlayer*-1;
-        for (int a = 1; a<=8; a++) {
-            for (int b=1; b<=8; b++) {
+        for (NSInteger a = 1; a<=8; a++) {
+            for (NSInteger b=1; b<=8; b++) {
                 Boolean check =[self checkFlip:a ToColumn:b ToCurrentPlayer:CurrentPlayer];
                 if(pieceArray[a][b] == 0 && check == true){
                     checkMoves++;
@@ -186,11 +186,11 @@ static float THINK_TIME=5000.0f;
     [[CCDirector sharedDirector]replaceScene:[HelloWorldLayer node]];
 }
 
--(void) flipPiece:(int)iRow ToColumn:(int)iColumn ToCurrentPlayer:(int)CurrentPlayer{
-    int RowChange = 0;
-    int ColumnChange = 0;
-    int FlipColor = 0;
-    int DrawColor = 0;
+-(void) flipPiece:(NSInteger)iRow ToColumn:(NSInteger)iColumn ToCurrentPlayer:(NSInteger)CurrentPlayer{
+    NSInteger RowChange = 0;
+    NSInteger ColumnChange = 0;
+    NSInteger FlipColor = 0;
+    NSInteger DrawColor = 0;
     
     //Player1(black) = 1 Player2(white) = -1
     if (CurrentPlayer == 1){
@@ -201,7 +201,7 @@ static float THINK_TIME=5000.0f;
         DrawColor = -1;
     }
     
-    for (int direction = 1;direction<=8;direction++){
+    for (NSInteger direction = 1;direction<=8;direction++){
         switch (direction){
             case (1) :
                 RowChange = 1;
@@ -239,7 +239,7 @@ static float THINK_TIME=5000.0f;
         //check the next piece
         //check the next piece
         if(pieceArray[iRow+RowChange][iColumn+ColumnChange] == FlipColor){
-            int count = 1;
+            NSInteger count = 1;
             while(true){
                 if (pieceArray[iRow + count * RowChange][ iColumn + count * ColumnChange] != DrawColor){
                     count = count + 1;
@@ -255,7 +255,7 @@ static float THINK_TIME=5000.0f;
             }
             
             //drawing the pieces and setting the color
-            for (int i = 1;i<=count;i++){
+            for (NSInteger i = 1;i<=count;i++){
                 pieceArray [iRow + RowChange * i][iColumn + ColumnChange * i] = DrawColor;
             }
         }
@@ -265,11 +265,11 @@ static float THINK_TIME=5000.0f;
     
 }
 
--(Boolean) checkFlip:(int)iRow ToColumn:(int)iColumn ToCurrentPlayer:(int)CurrentPlayer{
-    int RowChange = 0;
-    int ColumnChange = 0;
-    int FlipColor = 0;
-    int DrawColor = 0;
+-(Boolean) checkFlip:(NSInteger)iRow ToColumn:(NSInteger)iColumn ToCurrentPlayer:(NSInteger)CurrentPlayer{
+    NSInteger RowChange = 0;
+    NSInteger ColumnChange = 0;
+    NSInteger FlipColor = 0;
+    NSInteger DrawColor = 0;
     
     Boolean legalMove = false;
     //Player1(black) = 1 Player2(white) = -1
@@ -281,7 +281,7 @@ static float THINK_TIME=5000.0f;
         DrawColor = -1;
     }
     //the for loop checks each direction
-    for (int direction = 1;direction<=8;direction++){
+    for (NSInteger direction = 1;direction<=8;direction++){
         switch (direction){
             case (1) :
                 RowChange = 1;
@@ -318,7 +318,7 @@ static float THINK_TIME=5000.0f;
         }
         //check the next piece
         if(pieceArray[iRow+RowChange][iColumn+ColumnChange] == FlipColor){
-            int count = 1;
+            NSInteger count = 1;
             while(true){
                 if (pieceArray[iRow + count * RowChange][iColumn + count * ColumnChange] != DrawColor){
                     count = count + 1;
@@ -344,12 +344,12 @@ static float THINK_TIME=5000.0f;
 }
 
 
--(int) checkAI:(int)iRow ToColumn:(int)iColumn {
-    int RowChange = 0;
-    int ColumnChange = 0;
-    int FlipColor = 0;
-    int DrawColor = 0;
-    int piecesTaken = 0;
+-(NSInteger) checkAI:(NSInteger)iRow ToColumn:(NSInteger)iColumn {
+    NSInteger RowChange = 0;
+    NSInteger ColumnChange = 0;
+    NSInteger FlipColor = 0;
+    NSInteger DrawColor = 0;
+    NSInteger piecesTaken = 0;
     
     //Player1(black) = 1 Player2(white) = -1
     if (CurrentPlayer == 1){
@@ -360,7 +360,7 @@ static float THINK_TIME=5000.0f;
         DrawColor = -1;
     }
     //the for loop checks each direction
-    for (int direction = 1;direction<=8;direction++){
+    for (NSInteger direction = 1;direction<=8;direction++){
         switch (direction){
             case (1) :
                 RowChange = 1;
@@ -397,7 +397,7 @@ static float THINK_TIME=5000.0f;
         }
         //check the next piece
         if(pieceArray[iRow+RowChange][iColumn+ColumnChange] == FlipColor){
-            int count = 1;
+            NSInteger count = 1;
             while(true){
                 if (pieceArray[iRow + count * RowChange][iColumn + count * ColumnChange] != DrawColor){
                     count = count + 1;
@@ -420,7 +420,7 @@ static float THINK_TIME=5000.0f;
     }
     return piecesTaken;
 }
--(Boolean)isLegalMove:(int)boardX ToBoardY:(int)boardY ToCurrentPlayer:(int)CurrentPlayer{
+-(Boolean)isLegalMove:(NSInteger)boardX ToBoardY:(NSInteger)boardY ToCurrentPlayer:(NSInteger)CurrentPlayer{
     Boolean legalMove = false;
     
     if (pieceArray[boardX][boardY] == 0){
@@ -429,11 +429,11 @@ static float THINK_TIME=5000.0f;
     return legalMove;
 }
 
--(int)NumberOfMoves:(int)CurrentPlayer{
-    int total = 0;
+-(NSInteger)NumberOfMoves:(NSInteger)CurrentPlayer{
+    NSInteger total = 0;
     //look for possible moves
-    for (int i = 1; i<=8; i++) {
-        for (int j= 1; j<=8; j++) {
+    for (NSInteger i = 1; i<=8; i++) {
+        for (NSInteger j= 1; j<=8; j++) {
             if (pieceArray[i][j] == 0){
                 Boolean check = [self checkFlip:i ToColumn:j ToCurrentPlayer:CurrentPlayer];
                 if (check == true) {
@@ -459,7 +459,7 @@ static float THINK_TIME=5000.0f;
     //PLAYER TURN
     CGPoint location = [touch locationInView: [touch view]];
     
-    for (int i=1; i<=8; i++) {
+    for (NSInteger i=1; i<=8; i++) {
         if (location.x >= (i-1)*40 && location.x <= (i)*40) {
             boardX = i;
         }
@@ -467,7 +467,7 @@ static float THINK_TIME=5000.0f;
             boardY = i;
         }
     }
-    int moves = [self NumberOfMoves:CurrentPlayer];
+    NSInteger moves = [self NumberOfMoves:CurrentPlayer];
     
     //checks if move is legal
     if ([self isLegalMove:boardX ToBoardY:boardY ToCurrentPlayer:CurrentPlayer] && moves > 0){
@@ -487,11 +487,11 @@ static float THINK_TIME=5000.0f;
         _slipTime=0.f;
         [self schedule:@selector(pauseForThink:)];
         //AI TURN
-        int bestX,bestY, bestMove = -10;
-        for (int i = 1; i<=8; i++) {
-            for (int j= 1; j<=8; j++) {
+        NSInteger bestX,bestY, bestMove = -10;
+        for (NSInteger i = 1; i<=8; i++) {
+            for (NSInteger j= 1; j<=8; j++) {
                 if (pieceArray[i][j] == 0){
-                    int piecesTaken = [self checkAI:i ToColumn:j];
+                    NSInteger piecesTaken = [self checkAI:i ToColumn:j];
                     if (piecesTaken > 0) {
                         piecesTaken += valueArray[i-1][j-1];
                     }
